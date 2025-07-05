@@ -1,0 +1,601 @@
+:root {
+  --bright-orange: #e9520c;
+  --light-orange: #f5caba;
+  --dark-orange: rgba(135, 49, 9, 0.33);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: var(--light-orange);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: var(--dark-orange);
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+
+}
+.error-message {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--bright-orange); /* Bootstrap danger red */
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.error-message.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-height: 700px) {
+  .navbar {
+    padding: 8px 20px; /* Reduced padding for short screens */
+  }
+
+  .home-icon {
+    width: 35px;
+    height: 35px; /* Smaller icon */
+  }
+
+  h1, h2 {
+    font-size: 1.2rem; /* Reduce heading font size inside navbar if needed */
+  }
+}
+
+
+.home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.home-icon {
+  width: 50px;
+  height: 50px;
+  stroke: var(--light-orange);
+  transition: all 0.3s ease;
+}
+
+.home-button:hover .home-icon {
+  stroke: white;
+  transform: scale(1.1); 
+}
+
+
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Logo and star styling */
+.logo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.logo-link {
+  display: block;
+  margin-bottom: 0;
+}
+
+.logo {
+  max-width: 400px;
+  height: auto;
+  position: relative;
+  z-index: 3;
+  transition: transform 0.5s ;
+}
+
+.logo:hover {
+  transform: scale(1.02) !important; /* Slightly larger on hover */
+  z-index : 4  !important; /* Bring to front */
+}
+
+
+.star-image {
+  position: absolute;
+  min-width: 330px;
+  height: auto;
+  z-index: 1;
+}
+
+/* Search form styling */
+#search-form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 3px solid var(--bright-orange);
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#search-bar {
+  flex-grow: 1;
+  padding: 18px 25px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+
+.input-group .btn {
+  background-color: white;
+  color: var(--bright-orange);
+  border: none;
+  padding: 18px 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s ease;
+  font-size: 19px;
+  box-shadow: none;
+  z-index: 2;}
+
+.input-group .btn:hover {
+  background-color: var(--bright-orange);
+  transform: scale(1.1); 
+
+}
+
+.toggle-btn,
+.toggle-container {
+  position: relative;
+}
+
+.toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid var(--bright-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: white;
+  color: var(--bright-orange);
+  text-align: center;
+  border: 1px solid var(--bright-orange);
+  padding: 4px 8px;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 125%; /* or top: 125% depending on placement */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+}
+
+.tooltip-text2 {
+  visibility: visible;
+  background-color: white;
+  color: var(--bright-orange);
+  text-align: center;
+  border: 1px solid var(--bright-orange);
+  padding: 4px 8px;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 125%; /* or top: 125% depending on placement */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  white-space: nowrap;
+  opacity: 1;
+  transition: all 0.3s ease;
+  pointer-events: none;
+
+}
+
+
+
+.toggle-btn:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toggle-btn.active {
+  background-color: var(--bright-orange);
+}
+
+.toggle-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--bright-orange);
+}
+
+.toggle-btn.active .toggle-icon {
+  stroke: white;
+}
+
+.toggle-btn:hover {
+  background-color: var(--bright-orange);
+  transform: scale(1.1);
+
+}
+
+.toggle-btn:hover .toggle-icon {
+  stroke: white;
+}
+
+/* Search icon dropdown button */
+.search-dropdown {
+  position: relative;
+}
+
+.search-icon-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid var(--bright-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.ollama-icon-spin {
+  animation: spin 1s linear infinite;
+}
+
+.search-icon-btn:hover {
+  background-color: var(--bright-orange);
+  border-color: var(--bright-orange);
+  color: white;
+  transform: scale(1.1);
+}
+
+.search-icon-btn:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.search-icon-btn:hover svg {
+  stroke: white;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--bright-orange);
+}
+
+/* Dropdown styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 70px;
+  background-color: white;
+  min-width: 150px;
+  border: 3px solid var(--bright-orange);
+  border-radius: 15px;
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-dropdown.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-option {
+  color: var(--bright-orange);
+  padding: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  transition: all 0.3s;
+
+}
+
+.dropdown-option:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-option:hover {
+  background-color: var(--bright-orange);
+  color: white;
+}
+
+.dropdown-option img,
+.dropdown-option svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  color: var(--bright-orange);
+}
+
+.dropdown-option:hover svg {
+  stroke: white;
+}
+
+.search-icon-btn svg,
+.dropdown-option svg {
+  stroke: var(--bright-orange);
+  transition: all 0.3s ease;
+}
+
+.dropdown-option:hover svg{
+  stroke: white;
+  transform: scale(1.1);
+}
+
+/* Button container for aligned buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  margin-right: 150px;
+  width: 100%;
+}
+
+/* Admin button and other buttons */
+
+#admin-button-container,
+#hackernews-button-container,
+.button-container form {
+  margin: 0;
+}
+
+#hackernews-button-container .btn,
+form .btn,
+#admin-button-container .btn {
+  border: 3px solid var(--bright-orange);
+  background-color: white;
+  color: var(--bright-orange);
+  border-radius: 30px;
+  padding: 15px 35px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#hackernews-button-container .btn:hover,
+form .btn:hover,
+#admin-button-container .btn:hover {
+  background-color: var(--bright-orange);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Ollama icon container */
+.ollama-icon-container svg {
+  color: var(--bright-orange);
+}
+
+/* Change SVG color to white when the toggle button is hovered */
+.toggle-btn:hover .ollama-icon-container svg {
+  color: white;
+}
+
+/* Change SVG color to white when the toggle button is pressed */
+.toggle-btn:active .ollama-icon-container svg,
+.toggle-btn.active .ollama-icon-container svg {
+  color: white;
+  fill: white;
+}
+
+
+
+
+#search-bar:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  #search-options,
+  .btn {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    margin-left:45%;
+  }
+
+  #hackernews-button-container .btn,
+  form .btn,
+  #admin-button-container .btn {
+    width: 100%;
+  }
+
+  #search-form {
+    flex-direction: column;
+  }
+
+  .toggle-container {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    max-width: 300px;
+  }
+  .star-image {
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    max-width: 220px;
+  }
+  .star-image {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 160px;
+  }
+  .star-image {
+    min-width: 150px;
+  }
+}
+
+#message {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  color: var(--bright-orange);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding-right: 15px;
+}
+
+#message.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+
+/* === Responsive Hover Control for home.css === */
+
+@media (hover: hover) {
+  .home-button:hover .home-icon {
+    stroke: white;
+    transform: scale(1.1);
+  }
+
+  .logo:hover {
+    transform: scale(1.02) !important;
+    z-index: 4 !important;
+  }
+
+  .input-group .btn:hover,
+  #hackernews-button-container .btn:hover,
+  form .btn:hover,
+  #admin-button-container .btn:hover {
+    background-color: var(--bright-orange);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .toggle-btn:hover {
+    background-color: var(--bright-orange);
+    transform: scale(1.1);
+  }
+
+  .toggle-btn:hover .toggle-icon,
+  .toggle-btn:hover .ollama-icon-container svg,
+  .toggle-btn:active .ollama-icon-container svg,
+  .toggle-btn.active .ollama-icon-container svg {
+    stroke: white;
+    color: white;
+    fill: white;
+  }
+
+  .toggle-btn:hover .tooltip-text,
+  .search-icon-btn:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .search-icon-btn:hover {
+    background-color: var(--bright-orange);
+    border-color: var(--bright-orange);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .search-icon-btn:hover svg {
+    stroke: white;
+  }
+
+  .dropdown-option:hover {
+    background-color: var(--bright-orange);
+    color: white;
+  }
+
+  .dropdown-option:hover svg {
+    stroke: white;
+    transform: scale(1.1);
+  }
+}
+
+@media (hover: none) {
+  /* No hover effects on touch devices */
+  .tooltip-text2 {
+    display: none !important;
+  }
+}
+
+
+
+

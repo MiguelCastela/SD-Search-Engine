@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/" class="home-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-icon">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="stat-container">
+        <h2>Top 10 Searches</h2>
+        <ul id="top10">
+            <li th:each="search : ${top10}" th:text="${search}"></li>
+        </ul>
+        </div>
+
+
+        <div class="stat-container">    
+            <h2>Average Times</h2>
+            <ul id="averageTimes"
+            th:if="${averageTimes != null and activeBarrels != null}">
+            <li th:each="time, iterStat : ${averageTimes}" 
+                th:if="${time != null and activeBarrels.size() > iterStat.index and activeBarrels[iterStat.index] != null}"
+                th:text="'Barrel ' + ${activeBarrels[iterStat.index]} + ': ' + ${time} + ' ms'"></li>
+            </ul>
+            </div>
+
+
+        <div class="stat-container">
+            <h2>Active Barrels</h2>
+            <ul id="activeBarrels">
+            <li th:each="barrel : ${activeBarrels}" 
+                th:text="'Barrel ID: ' + ${barrel}"></li>
+            </ul> 
+            </div>
+
+
+
+        <div class="stat-container">
+            <h2>Barrel Sizes</h2>
+            <ul id="barrelSizes"
+            th:if="${barrelSize != null and activeBarrels != null}">
+            <li th:each="size, iterStat : ${barrelSize}" 
+                th:if="${size != null and activeBarrels.size() > iterStat.index and activeBarrels[iterStat.index] != null}"
+                th:text="'Barrel ' + ${activeBarrels[iterStat.index]} + ' Size: ' + ${size}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const socket = new SockJS('/stats');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function () {
+            console.log('Connected to WebSocket');
+            stompClient.subscribe('/topic/stats', function (message) {
+                const stats = JSON.parse(message.body);
+
+                // Update Top 10 Searches
+                const top10List = document.getElementById('top10');
+                top10List.innerHTML = '';
+                stats.top10.forEach(search => {
+                    const li = document.createElement('li');
+                    li.classList.add('stat-item');
+                    li.textContent = search;
+                    top10List.appendChild(li);
+                });
+
+                // Update Average Times
+                const averageTimesList = document.getElementById('averageTimes');
+                averageTimesList.innerHTML = '';
+                stats.averageTimes.forEach((time, index) => {
+                    if (time !== null && stats.activeBarrels[index] != null) {
+                        const li = document.createElement('li');
+                        li.classList.add('stat-item');
+                        li.textContent = 'Barrel ' + stats.activeBarrels[index] + ': ' + time.toFixed(1) + ' ms';
+                        averageTimesList.appendChild(li);
+                    }
+                });
+
+                // Update Active Barrels
+                const activeBarrelsList = document.getElementById('activeBarrels');
+                activeBarrelsList.innerHTML = '';
+                stats.activeBarrels.forEach(barrel => {
+                    const li = document.createElement('li');
+                    li.classList.add('stat-item');
+                    li.textContent = 'Barrel ID: ' + barrel;
+                    activeBarrelsList.appendChild(li);
+                });
+
+                // Update Barrel Sizes
+                const barrelSizesList = document.getElementById('barrelSizes');
+                barrelSizesList.innerHTML = '';
+                stats.barrelSize.forEach((size, index) => {
+                    if (size != null && stats.activeBarrels[index] != null) {
+                        const li = document.createElement('li');
+                        li.classList.add('stat-item');
+                        li.textContent = 'Barrel ' + stats.activeBarrels[index] + ' Size: ' + size;
+                        barrelSizesList.appendChild(li);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
