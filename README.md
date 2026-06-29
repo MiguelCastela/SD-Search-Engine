@@ -136,5 +136,5 @@ gateway address configured in `config.properties`.
 
 ## Authors
 
-- Miguel Castela (2022212972)
-- Miguel Martins (2022213951)
+- Miguel Castela
+- Miguel Martins 
