@@ -158,5 +158,5 @@ through `.gitignore`; recreate a Python environment with
 
 ## Authors
 
-- Miguel Castela (2022212972)
-- Miguel Martins (2022213951)
+- Miguel Castela
+- Miguel Martins 
