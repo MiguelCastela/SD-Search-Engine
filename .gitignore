@@ -24,3 +24,10 @@ config.local.properties
 # OS
 .DS_Store
 Thumbs.db
+
+# Python (used by some course exercises)
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/

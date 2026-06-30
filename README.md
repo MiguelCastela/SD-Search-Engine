@@ -120,12 +120,34 @@ gateway address configured in `config.properties`.
 ├── src/main/java/search/   Java sources (gateway, barrels, downloaders, client, web)
 ├── src/main/resources/     Spring Boot templates (Thymeleaf), CSS, and images
 ├── Files/                  Runtime state (index, queue, stats); not tracked in git
+├── Exercises/              Course tutorials and lab exercises (see below)
 ├── docs/                   Project specification PDFs, report, and notes
 ├── config.properties       Runtime configuration
 ├── makefile                Build and run targets
 ├── pom.xml                 Maven build definition
 └── README.md
 ```
+
+## Exercises
+
+The `Exercises/` directory holds the course tutorials and lab work that lead up
+to the main project. Each tutorial folder contains its statement PDF together
+with `java/` and `python/` reference implementations.
+
+```
+Exercises/
+├── ficha3_cp/                          Concurrent programming lab (Java)
+├── tutorial1-threading/                Threads and synchronization
+├── tutorial2-parallel-programming/     Parallel programming
+├── tutorial3-RMI-or-GRPC/              Remote invocation with RMI or gRPC
+├── tutorial4-Spring-Boot-or-fastapi/   Web services with Spring Boot or FastAPI
+└── tutorial5-Restful-services-integration/  Integrating RESTful services
+```
+
+These are self contained learning exercises and are independent of the main
+search engine. Python virtual environments, caches, and OS metadata are ignored
+through `.gitignore`; recreate a Python environment with
+`python -m venv` and `pip install -r requirements.txt` where a tutorial provides one.
 
 ## Documentation
 

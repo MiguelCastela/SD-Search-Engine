@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Projects List</title>
+</head>
+<body>
+    <h1>Projects</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Color</th>
+                <th>Description</th>
+                <th>Days</th>
+                <th>Price</th>
+                <th>Featured</th>
+                <th>Launch Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="project : ${projects}">
+                <td th:text="${project.id}"></td>
+                <td th:text="${project.title}"></td>
+                <td th:text="${project.type}"></td>
+                <td th:text="${project.color}"></td>
+                <td th:text="${project.description}"></td>
+                <td th:text="${project.days}"></td>
+                <td th:text="${project.price}"></td>
+                <td th:text="${project.featured} ? 'Yes' : 'No'"></td>
+                <td th:text="${project.launchDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/create-project}">Create a New Project</a>
+</body>
+</html>

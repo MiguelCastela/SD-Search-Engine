@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Counter Test</title>
+</head>
+<body>
+    <h1>Counter Test</h1>
+    <p>String Value from Session: <span th:text="${stringValue}"></span></p>
+    <p>Session Counter: <span th:text="${sessioncounter}"></span></p>
+    <p>Request Scoped Counter: <span th:text="${requestcounter2}"></span></p>
+    <p>Session Scoped Counter: <span th:text="${sessioncounter2}"></span></p>
+    <p>Application Scoped Counter: <span th:text="${applicationcounter2}"></span></p>
+</body>
+</html>
