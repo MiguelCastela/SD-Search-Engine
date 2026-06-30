@@ -136,7 +136,6 @@ with `java/` and `python/` reference implementations.
 
 ```
 Exercises/
-├── ficha3_cp/                          Concurrent programming lab (Java)
 ├── tutorial1-threading/                Threads and synchronization
 ├── tutorial2-parallel-programming/     Parallel programming
 ├── tutorial3-RMI-or-GRPC/              Remote invocation with RMI or gRPC
